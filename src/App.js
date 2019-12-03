@@ -9,10 +9,6 @@ import { setTodos, addTodo } from "./actionCreators/actionCreaters";
 
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         // Component oluştuktan sonra gerekli olan datayı localstoragedan geyiriyoruz.
         let localTodos = window.localStorage.getItem("todos");

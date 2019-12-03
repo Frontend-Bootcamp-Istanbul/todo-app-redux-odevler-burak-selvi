@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from "./actionCreators/actionCreaters";
+import { addTodo, showNotify, hideNotify } from "./actionCreators/actionCreaters";
+import Notification from './Notification';
 
 
 class AddTodo extends React.Component {
@@ -27,6 +28,10 @@ class AddTodo extends React.Component {
         this.setState({
             inputVal: ""
         });
+        this.showNotify();
+        setTimeout(() => {
+            this.hideNotify();
+        }, 1000);
     }
 
     onTodoAdd(newTodo) {
@@ -37,20 +42,41 @@ class AddTodo extends React.Component {
         });
     }
 
+    showNotify() {
+        this.props.showNotify('add');
+    }
+
+    hideNotify() {
+        this.props.hideNotify();
+    }
+
     render() {
-        return <form
-            onSubmit={this.addTodo}>
-            <input
-                type="text"
-                value={this.state.inputVal}
-                onChange={this.changeInput} />
-            <button>Ekle</button>
-        </form>
+        const show = this.props.showing && (this.props.type === 'add')
+        return (
+            <div>
+                {show && <Notification message="todo eklendi" />}
+                <form
+                    onSubmit={this.addTodo}>
+                    <input
+                        type="text"
+                        value={this.state.inputVal}
+                        onChange={this.changeInput} />
+                    <button>Ekle</button>
+                </form>
+            </div>
+        );
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    addTodo: (todo) => { dispatch(addTodo(todo)) }
+const mapStateToProps = (state) => ({
+    showing: state.showing,
+    type: state.notifyType
 });
 
-export default connect(null, mapDispatchToProps)(AddTodo);
+const mapDispatchToProps = dispatch => ({
+    addTodo: (todo) => { dispatch(addTodo(todo)) },
+    showNotify: (notifyType) => { dispatch(showNotify(notifyType)) },
+    hideNotify: () => { dispatch(hideNotify()) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);

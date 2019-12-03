@@ -1,8 +1,10 @@
-import { SET_FILTER, SET_TODOS, ADD_TODO, REMOVE_TODO, REMOVE_TODOS, TOGGLE_TODO } from "../actions/actions";
+import { SET_FILTER, SET_TODOS, ADD_TODO, REMOVE_TODO, REMOVE_TODOS, TOGGLE_TODO, SHOW_NOTIFICATION, HIDE_NOTIFICATION } from "../actions/actions";
 
 const rootReducer = function (state = {
     activeFilter: "all",
-    todos: []
+    todos: [],
+    showing: false,
+    notifyType: ''
 }, action) {
     switch (action.type) {
         case SET_FILTER:
@@ -27,6 +29,10 @@ const rootReducer = function (state = {
                     }
                 })
             }
+        case SHOW_NOTIFICATION:
+            return { ...state, showing: true, notifyType: action.notifyType }
+        case HIDE_NOTIFICATION:
+            return { ...state, showing: false }
         default:
             return state;
     }
