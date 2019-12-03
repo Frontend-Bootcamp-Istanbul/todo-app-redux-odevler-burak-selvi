@@ -1,25 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { toggleTodo, removeTodo } from "./actionCreators/actionCreaters";
+import { TodoItem, RemoveButton } from './customStyledComponents/StyledComponents';
 
 class Todo extends Component {
     render() {
         const { content, id, checked, handleNotify } = this.props;
-        let itemClass = "todo-item";
+        let checkedClass = false;
         if (checked) {
-            itemClass += " checked";
+            checkedClass = true;
         }
         return (
-            <div className={itemClass} onClick={() => { this.props.toggleTodo(id) }}>
+            <TodoItem checkedClass={checkedClass} onClick={() => { this.props.toggleTodo(id) }}>
                 {content}
-                <span
-                    className="remove-todo"
+                <RemoveButton
                     onClick={(e) => {
                         e.stopPropagation();
                         this.props.removeTodo(id);
                         handleNotify();
-                    }}>X</span>
-            </div>
+                    }}>X</RemoveButton>
+            </TodoItem>
         )
     }
 }

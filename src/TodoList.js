@@ -3,6 +3,7 @@ import Todo from './Todo';
 import { connect } from "react-redux";
 import { showNotify, hideNotify } from "./actionCreators/actionCreaters";
 import Notification from './Notification';
+import { H3Container, TodoListContainer } from './customStyledComponents/StyledComponents';
 
 
 class TodoList extends React.Component {
@@ -24,10 +25,10 @@ class TodoList extends React.Component {
         const { showing, type } = this.props;
         const show = showing && (type === 'remove');
         return (
-            <div className="todo-list">
+            <TodoListContainer todolist>
                 {show && <Notification message="todo silindi" />}
-                <h3>TodoList <span>{this.props.todos.length}</span>
-                </h3>
+                <H3Container>TodoList <span>{this.props.todos.length}</span>
+                </H3Container>
                 {
                     this.props.todos.map((todo) => {
                         return <Todo
@@ -37,7 +38,7 @@ class TodoList extends React.Component {
                         />
                     })
                 }
-            </div>
+            </TodoListContainer>
         );
     }
 }

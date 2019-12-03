@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addTodo, showNotify, hideNotify } from "./actionCreators/actionCreaters";
 import Notification from './Notification';
+import { Input, Button } from './customStyledComponents/StyledComponents';
 
 
 class AddTodo extends React.Component {
@@ -57,11 +58,10 @@ class AddTodo extends React.Component {
                 {show && <Notification message="todo eklendi" />}
                 <form
                     onSubmit={this.addTodo}>
-                    <input
-                        type="text"
+                    <Input
                         value={this.state.inputVal}
                         onChange={this.changeInput} />
-                    <button>Ekle</button>
+                    <Button>Ekle</Button>
                 </form>
             </div>
         );

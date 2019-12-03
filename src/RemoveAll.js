@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from "react-redux";
 import { removeTodos, showNotify, hideNotify } from "./actionCreators/actionCreaters";
 import Notification from './Notification';
+import { RemoveAllButton } from './customStyledComponents/StyledComponents';
 
 class RemoveAll extends React.Component {
     handleNotify = () => {
@@ -24,12 +25,12 @@ class RemoveAll extends React.Component {
         return (
             <>
                 {show && <Notification message="tüm todolar silindi" />}
-                <button className="remove-all" onClick={() => {
+                <RemoveAllButton onClick={() => {
                     this.props.removeTodos();
                     this.handleNotify();
                 }}>
                     Tümünü Sil
-                </button>
+                </RemoveAllButton>
             </>
         );
     }

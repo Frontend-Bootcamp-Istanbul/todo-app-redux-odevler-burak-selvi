@@ -6,6 +6,8 @@ import "./App.css";
 import Filters from "./Filters";
 import { connect } from "react-redux";
 import { setTodos, addTodo } from "./actionCreators/actionCreaters";
+import { TodoContainer, H3Container, TodoListContainer } from './customStyledComponents/StyledComponents';
+
 
 
 class App extends Component {
@@ -37,21 +39,22 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App" id="todo">
-                <div className="todo-list todo-list-add">
-                    <h3>Todo Ekle / Sil</h3>
+            <TodoContainer>
+                <TodoListContainer>
+                    <H3Container>Todo Ekle / Sil</H3Container>
                     <div>
                         <AddTodo />
                         <RemoveAll />
                         <Filters />
                     </div>
-                </div>
+                </TodoListContainer>
                 <TodoList
                     todos={this.filterTodos(this.props.todos, this.props.activeFilter)} />
-            </div>
+            </TodoContainer>
         );
     }
 }
+
 
 const mapStateToProps = (state) => ({
     activeFilter: state.activeFilter,
