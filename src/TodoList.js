@@ -2,14 +2,14 @@ import React from 'react';
 import Todo from './Todo';
 
 
-class TodoList extends React.Component{
-    constructor(props){
+class TodoList extends React.Component {
+    constructor(props) {
         super(props);
     }
-    render(){
+    render() {
         return (
             <div className="todo-list">
-                <h3>{this.props.title} <span>{this.props.todos.length}</span>
+                <h3>TodoList <span>{this.props.todos.length}</span>
                 </h3>
                 {
                     this.props.todos.map((todo) => {

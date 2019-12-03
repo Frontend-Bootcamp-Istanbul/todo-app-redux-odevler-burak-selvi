@@ -1,20 +1,19 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {setFilter} from "./actionCreators/actionCreaters";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { setFilter } from "./actionCreators/actionCreaters";
 
 const options = [
-    {label: "Hepsi", labelKey: "all"},
-    {label: "Tamamlanmış", labelKey: "completed"},
-    {label: "Tamamlanmamış", labelKey: "uncompleted"}
+    { label: "Hepsi", labelKey: "all" },
+    { label: "Tamamlanmış", labelKey: "completed" },
+    { label: "Tamamlanmamış", labelKey: "uncompleted" }
 ];
 
 class Filters extends Component {
     render() {
-        console.log(this.props);
         return <div>
             {
                 options.map((option) => {
-                    return <div onClick={() => {
+                    return <div key={Math.random()} onClick={() => {
                         this.props.changeFilter(option.labelKey);
                     }}>
                         {option.label}
@@ -32,7 +31,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  changeFilter: (newFilter) => {dispatch(setFilter(newFilter))}
+    changeFilter: (newFilter) => { dispatch(setFilter(newFilter)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filters);
