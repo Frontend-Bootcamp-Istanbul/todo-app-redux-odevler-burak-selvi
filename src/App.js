@@ -5,7 +5,7 @@ import RemoveAll from "./RemoveAll";
 import "./App.css";
 import Filters from "./Filters";
 import { connect } from "react-redux";
-import { setTodos, addTodo } from "./actionCreators/actionCreaters";
+import { setTodos } from "./actionCreators/actionCreaters";
 import { TodoContainer, H3Container, TodoListContainer } from './customStyledComponents/StyledComponents';
 
 
@@ -55,15 +55,13 @@ class App extends Component {
     }
 }
 
-
 const mapStateToProps = (state) => ({
     activeFilter: state.activeFilter,
     todos: state.todos
 });
 
 const mapDispatchToProps = dispatch => ({
-    addTodos: (todos) => { dispatch(setTodos(todos)) },
-    addTodo: (todo) => { dispatch(addTodo(todo)) }
+    addTodos: (todos) => { dispatch(setTodos(todos)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
