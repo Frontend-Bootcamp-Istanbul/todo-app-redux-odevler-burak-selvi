@@ -9,23 +9,41 @@ export function setTodos(todos) {
 }
 
 export function addTodo(todo) {
-    return { type: ADD_TODO, todo }
+    return (dispatch) => {
+        if (todo.content) {
+            dispatch({ type: ADD_TODO, todo });
+            dispatch(showNotify(`${todo.content} eklendi`));
+        } else {
+            dispatch(showNotify('Boş bırakılamaz !!!'));
+        }
+    }
 }
 
 export function removeTodo(id) {
-    return { type: REMOVE_TODO, id }
+    return (dispatch) => {
+        dispatch({ type: REMOVE_TODO, id });
+        dispatch(showNotify('silindi'));
+    }
 }
 
 export function removeTodos() {
-    return { type: REMOVE_TODOS }
+    return (dispatch) => {
+        dispatch({ type: REMOVE_TODOS });
+        dispatch(showNotify('Hepsi Silindi'));
+    }
 }
 
 export function toggleTodo(id) {
     return { type: TOGGLE_TODO, id }
 }
 
-export function showNotify(notifyType) {
-    return { type: SHOW_NOTIFICATION, notifyType }
+export function showNotify(text) {
+    return (dispatch) => {
+        dispatch({ type: SHOW_NOTIFICATION, text });
+        setTimeout(() => {
+            dispatch(hideNotify());
+        }, 2000);
+    }
 }
 
 export function hideNotify() {
