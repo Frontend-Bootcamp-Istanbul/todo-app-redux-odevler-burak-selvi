@@ -5,7 +5,7 @@ import { TodoItem, RemoveButton } from './customStyledComponents/StyledComponent
 
 class Todo extends Component {
     render() {
-        const { content, id, checked, handleNotify } = this.props;
+        const { content, id, checked } = this.props;
         let checkedClass = false;
         if (checked) {
             checkedClass = true;
@@ -17,7 +17,6 @@ class Todo extends Component {
                     onClick={(e) => {
                         e.stopPropagation();
                         this.props.removeTodo(id);
-                        handleNotify();
                     }}>X</RemoveButton>
             </TodoItem>
         )

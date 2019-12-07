@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo, showNotify, hideNotify } from "./actionCreators/actionCreaters";
-import Notification from './Notification';
+import { addTodo } from "./actionCreators/actionCreaters";
 import { Input, Button } from './customStyledComponents/StyledComponents';
 
 
@@ -29,10 +28,6 @@ class AddTodo extends React.Component {
         this.setState({
             inputVal: ""
         });
-        this.showNotify();
-        setTimeout(() => {
-            this.hideNotify();
-        }, 1000);
     }
 
     onTodoAdd(newTodo) {
@@ -43,19 +38,9 @@ class AddTodo extends React.Component {
         });
     }
 
-    showNotify() {
-        this.props.showNotify('add');
-    }
-
-    hideNotify() {
-        this.props.hideNotify();
-    }
-
     render() {
-        const show = this.props.showing && (this.props.type === 'add')
         return (
             <div>
-                {show && <Notification message="todo eklendi" />}
                 <form
                     onSubmit={this.addTodo}>
                     <Input
@@ -70,13 +55,11 @@ class AddTodo extends React.Component {
 
 const mapStateToProps = (state) => ({
     showing: state.showing,
-    type: state.notifyType
+
 });
 
 const mapDispatchToProps = dispatch => ({
-    addTodo: (todo) => { dispatch(addTodo(todo)) },
-    showNotify: (notifyType) => { dispatch(showNotify(notifyType)) },
-    hideNotify: () => { dispatch(hideNotify()) }
+    addTodo: (todo) => { dispatch(addTodo(todo)) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTodo);

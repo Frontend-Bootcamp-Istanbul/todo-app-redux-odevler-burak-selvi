@@ -7,6 +7,7 @@ import Filters from "./Filters";
 import { connect } from "react-redux";
 import { setTodos } from "./actionCreators/actionCreaters";
 import { TodoContainer, H3Container, TodoListContainer } from './customStyledComponents/StyledComponents';
+import Notification from './Notification';
 
 
 
@@ -40,6 +41,7 @@ class App extends Component {
     render() {
         return (
             <TodoContainer>
+                {this.props.showing && <Notification message={this.props.text} />}
                 <TodoListContainer>
                     <H3Container>Todo Ekle / Sil</H3Container>
                     <div>
@@ -56,8 +58,10 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    activeFilter: state.activeFilter,
-    todos: state.todos
+    activeFilter: state.todosReducer.activeFilter,
+    todos: state.todosReducer.todos,
+    text: state.notificationReducer.notifyText,
+    showing: state.notificationReducer.showing
 });
 
 const mapDispatchToProps = dispatch => ({
